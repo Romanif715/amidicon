@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amidicon — Офіційний дистриб'ютор | SantehSfera</title>
+<meta name="description" content="Офіційний дистриб'ютор Amidicon в Україні. Преміальна сантехніка від SantehSfera.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #140a0c;
+    --bg-soft: #1c0f12;
+    --surface: #221318;
+    --ink: #f5efe9;
+    --muted: #a89b93;
+    --cherry: #be123c;
+    --cherry-light: #e11d48;
+    --cherry-deep: #9f1239;
+    --cherry-glow: rgba(190, 18, 60, 0.35);
+    --border: rgba(245, 239, 233, 0.08);
+  }
+
+  * { -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .font-serif { font-family: 'Playfair Display', serif; }
+
+  html { scroll-behavior: smooth; }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1.15s cubic-bezier(0.19, 1, 0.22, 1), transform 1.15s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .reveal-x {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 1.15s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .reveal-x.visible { opacity: 1; transform: translateX(0); }
+
+  .d1 { transition-delay: 0.12s; }
+  .d2 { transition-delay: 0.25s; }
+  .d3 { transition-delay: 0.4s; }
+  .d4 { transition-delay: 0.55s; }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cherry), transparent);
+  }
+
+  /* Buttons */
+  .btn-lux {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.1rem 2.5rem;
+    background: var(--cherry);
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 12px 40px -12px var(--cherry-glow);
+  }
+  .btn-lux:hover {
+    background: var(--cherry-deep);
+    letter-spacing: 0.22em;
+    box-shadow: 0 18px 50px -12px var(--cherry-glow);
+    transform: translateY(-2px);
+  }
+  .btn-lux::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: 0.7s;
+  }
+  .btn-lux:hover::before { left: 100%; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.1rem 2.5rem;
+    border: 1px solid rgba(245, 239, 233, 0.18);
+    color: var(--ink);
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--cherry);
+    color: var(--cherry-light);
+    letter-spacing: 0.22em;
+    box-shadow: 0 0 35px -10px var(--cherry-glow);
+  }
+
+  /* Nav */
+  .nav-item {
+    position: relative;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: rgba(245, 239, 233, 0.65);
+    transition: color 0.3s;
+  }
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 50%;
+    width: 0; height: 1px;
+    background: var(--cherry);
+    transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateX(-50%);
+  }
+  .nav-item:hover { color: var(--cherry-light); }
+  .nav-item:hover::after { width: 100%; }
+
+  /* Cursor glow */
+  .cursor-glow {
+    position: fixed;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(190, 18, 60, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee {
+    display: inline-block;
+    animation: marquee 45s linear infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(10px); opacity: 0.35; }
+  }
+  .scroll-pulse { animation: scrollPulse 2.4s ease-in-out infinite; }
+
+  .lux-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
+    border: 1px solid var(--border);
+    transition: all 0.55s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .lux-card:hover {
+    border-color: rgba(190, 18, 60, 0.45);
+    transform: translateY(-5px);
+    background: linear-gradient(180deg, rgba(190,18,60,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    box-shadow: 0 25px 50px -18px var(--cherry-glow);
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: 0.4em;
+  }
+
+  .pdf-frame {
+    background: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 35px 90px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(190,18,60,0.2);
+  }
+
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes pulseRuby {
+    0%, 100% { box-shadow: 0 0 0 0 var(--cherry-glow); }
+    50% { box-shadow: 0 0 0 8px transparent; }
+  }
+  .pulse-ruby { animation: pulseRuby 2s infinite; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--cherry-deep); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cherry); }
+</style>
+</head>
+<body class="noise relative">
+
+<!-- Cursor glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500" id="header">
+  <div class="max-w-[1600px] mx-auto px-6 sm:px-12 h-20 sm:h-24 flex items-center justify-between">
+    <a href="#" class="font-serif text-2xl sm:text-3xl font-bold tracking-tight">
+      Amidicon<span class="text-[--cherry]">.</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-10">
+      <a href="#about" class="nav-item">Про нас</a>
+      <a href="#catalog" class="nav-item">Каталог</a>
+      <a href="#price" class="nav-item">Прайс</a>
+      <a href="#contact" class="nav-item">Контакти</a>
+    </nav>
+
+    <div class="hidden lg:block text-[0.68rem] tracking-[0.25em] uppercase text-[--muted]">
+      Est. 2026
+    </div>
+
+    <button id="menuBtn" class="lg:hidden p-2" aria-label="Меню">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+  </div>
+  <div class="hairline opacity-40"></div>
+
+  <div id="mobileMenu" class="hidden lg:hidden bg-[--bg]/95 backdrop-blur-xl border-b border-[--border]">
+    <nav class="flex flex-col px-8 py-10 gap-7">
+      <a href="#about" class="font-serif text-2xl hover:text-[--cherry-light] transition">Про нас</a>
+      <a href="#catalog" class="font-serif text-2xl hover:text-[--cherry-light] transition">Каталог</a>
+      <a href="#price" class="font-serif text-2xl hover:text-[--cherry-light] transition">Прайс</a>
+      <a href="#contact" class="font-serif text-2xl hover:text-[--cherry-light] transition">Контакти</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center overflow-hidden pt-24">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(190,18,60,0.18),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(190,18,60,0.10),transparent_50%)]"></div>
+
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+    <span class="font-serif text-[32vw] font-black text-white/[0.025] leading-none whitespace-nowrap">AMIDICON</span>
+  </div>
+
+  <div class="relative max-w-[1600px] mx-auto px-6 sm:px-12 w-full grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7 z-10">
+      <div class="reveal flex items-center gap-4 mb-8">
+        <div class="w-10 h-px bg-[--cherry]"></div>
+        <span class="text-[1.1rem] tracking-[0.3em] uppercase text-[--cherry-light]">
+          Офіційний дистриб'ютор · Україна
+        </span>
+      </div>
+
+      <h1 class="font-serif text-[clamp(3.2rem,8vw,7.5rem)] font-light leading-[0.95] mb-8 reveal d1">
+        Преміальна<br>
+        <span class="italic font-normal text-[--cherry]">сантехніка</span><br>
+        <span class="font-bold">Amidicon</span>
+      </h1>
+
+      <p class="text-lg sm:text-xl text-[--ink]/60 max-w-xl mb-12 reveal d2 font-light leading-relaxed">
+        Преміальна колекція, що поєднує італійський дизайн, 
+        інженерну досконалість та довговічність у кожній деталі.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 reveal d3">
+        <a href="#catalog" class="btn-lux">
+          Дивитись колекцію
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn-ghost">Зв'язатися</a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 z-10 reveal d2">
+      <div class="relative">
+        <div class="absolute -top-5 -left-5 w-20 h-20 border-l border-t border-[--cherry]/45"></div>
+        <div class="absolute -bottom-5 -right-5 w-20 h-20 border-r border-b border-[--cherry]/45"></div>
+
+        <div class="lux-card p-9 sm:p-11">
+          <div class="text-[0.62rem] tracking-[0.3em] uppercase text-[--muted] mb-5">
+            SantehSfera × Amidicon
+          </div>
+          <div class="font-serif text-5xl font-bold text-[--cherry] mb-5">01</div>
+          <p class="text-[--ink]/65 leading-relaxed font-light mb-8">
+            Єдиний офіційний представник бренду Amidicon в Україні. 
+            Прямі поставки, гарантія якості, повний асортимент.
+          </p>
+          <div class="hairline opacity-50"></div>
+          <div class="mt-6 grid grid-cols-2 gap-6">
+            <div>
+              <div class="font-serif text-3xl">100%</div>
+              <div class="text-[0.62rem] tracking-[0.2em] uppercase text-[--muted] mt-1">Оригінал</div>
+            </div>
+            <div>
+              <div class="font-serif text-3xl">24/7</div>
+              <div class="text-[0.62rem] tracking-[0.2em] uppercase text-[--muted] mt-1">Підтримка</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-pulse">
+    <span class="text-[0.58rem] tracking-[0.3em] uppercase text-[--muted]">Scroll</span>
+    <div class="w-px h-10 bg-gradient-to-b from-[--cherry] to-transparent"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="py-9 border-y border-[--border] overflow-hidden bg-[--bg-soft]/60">
+  <div class="flex whitespace-nowrap">
+    <div class="marquee">
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Якість</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Дизайн</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Надійність</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Інновації</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Якість</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Дизайн</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Надійність</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+      <span class="font-serif text-2xl sm:text-3xl italic text-[--ink]/25 mx-8">Інновації</span>
+      <span class="text-[--cherry] mx-4">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="relative py-28 sm:py-40">
+  <div class="max-w-[1600px] mx-auto px-6 sm:px-12 grid lg:grid-cols-12 gap-16">
+    <div class="hidden lg:flex lg:col-span-1 justify-start">
+      <span class="vertical-text text-[0.62rem] tracking-[0.35em] uppercase text-[--muted] reveal-x">
+        About · 01
+      </span>
+    </div>
+
+    <div class="lg:col-span-6">
+      <h2 class="font-serif text-[clamp(2.4rem,4.8vw,4.2rem)] font-light leading-[1.05] mb-9 reveal">
+        Філософія<br>
+        <span class="italic text-[--cherry]">досконалості</span>
+      </h2>
+      <div class="space-y-6 text-[--ink]/65 text-lg font-light leading-relaxed reveal d1">
+        <p>
+          Ми є офіційним дистриб'ютором продукції <span class="text-[--cherry-light] font-normal">Amidicon</span> в Україні. 
+          Пропонуємо широкий асортимент якісної сантехніки з сучасним дизайном та високою надійністю.
+        </p>
+        <p>
+          Кожен виріб — результат поєднання інженерної точності та естетики. 
+          Ми обираємо лише те, що готові встановити у власному домі.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-8 mt-14 reveal d2">
+        <div>
+          <div class="font-serif text-4xl text-[--cherry]">15+</div>
+          <div class="text-[0.62rem] tracking-[0.2em] uppercase text-[--muted] mt-2">Років досвіду</div>
+        </div>
+        <div>
+          <div class="font-serif text-4xl text-[--cherry]">500+</div>
+          <div class="text-[0.62rem] tracking-[0.2em] uppercase text-[--muted] mt-2">Позицій</div>
+        </div>
+        <div>
+          <div class="font-serif text-4xl text-[--cherry]">1000+</div>
+          <div class="text-[0.62rem] tracking-[0.2em] uppercase text-[--muted] mt-2">Клієнтів</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 lg:col-start-8 reveal d3">
+      <div class="lux-card p-9">
+        <div class="text-[0.62rem] tracking-[0.3em] uppercase text-[--muted] mb-6">Наші принципи</div>
+        <ul class="space-y-6">
+          <li class="flex gap-4 items-start">
+            <span class="font-serif text-[--cherry] text-2xl leading-none mt-0.5">01</span>
+            <div>
+              <div class="font-normal mb-1">Оригінальна продукція</div>
+              <div class="text-sm text-[--ink]/50 font-light">Тільки прямі поставки від виробника</div>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="font-serif text-[--cherry] text-2xl leading-none mt-0.5">02</span>
+            <div>
+              <div class="font-normal mb-1">Експертна підтримка</div>
+              <div class="text-sm text-[--ink]/50 font-light">Консультація на кожному етапі</div>
+            </div>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="font-serif text-[--cherry] text-2xl leading-none mt-0.5">03</span>
+            <div>
+              <div class="font-normal mb-1">Гарантія якості</div>
+              <div class="text-sm text-[--ink]/50 font-light">Офіційна гарантія на всі товари</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog" class="relative py-28 sm:py-40 bg-[--bg-soft]">
+  <div class="absolute top-0 left-0 right-0 hairline opacity-30"></div>
+
+  <div class="max-w-[1600px] mx-auto px-6 sm:px-12">
+    <div class="grid lg:grid-cols-12 gap-8 items-end mb-16">
+      <div class="lg:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-5">
+          <div class="w-10 h-px bg-[--cherry]"></div>
+          <span class="text-[0.68rem] tracking-[0.3em] uppercase text-[--cherry-light]">Collection · 02</span>
+        </div>
+        <h2 class="font-serif text-[clamp(2.4rem,4.8vw,4.5rem)] font-light leading-[1]">
+          Повний <span class="italic text-[--cherry]">каталог</span><br>
+          продукції
+        </h2>
+      </div>
+      <div class="lg:col-span-4 lg:text-right reveal d1">
+        <p class="text-[--ink]/55 font-light">Перегляньте або завантажте PDF-каталог з повним асортиментом Amidicon</p>
+      </div>
+    </div>
+
+    <div class="reveal d2">
+      <div class="pdf-frame">
+        <iframe src="КАТАЛОГ Amіdicon_.pdf" class="w-full h-[480px] sm:h-[620px] md:h-[760px]" title="Каталог Amidicon"></iframe>
+      </div>
+
+      <div class="mt-10 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div class="text-[0.65rem] tracking-[0.22em] uppercase text-[--muted]">PDF · Повна версія · 2026</div>
+        <a href="КАТАЛОГ Amіdicon_.pdf" target="_blank" download class="btn-lux">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          Завантажити
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="price" class="relative py-28 sm:py-40">
+  <div class="max-w-[1600px] mx-auto px-6 sm:px-12">
+    <div class="grid lg:grid-cols-12 gap-8 items-end mb-16">
+      <div class="lg:col-span-8 reveal">
+        <div class="flex items-center gap-4 mb-5">
+          <div class="w-10 h-px bg-[--cherry]"></div>
+          <span class="text-[0.68rem] tracking-[0.3em] uppercase text-[--cherry-light]">Pricing · 03</span>
+        </div>
+        <h2 class="font-serif text-[clamp(2.4rem,4.8vw,4.5rem)] font-light leading-[1]">
+          Актуальний <span class="italic text-[--cherry]">прайс</span><br>
+          лист
+        </h2>
+      </div>
+      <div class="lg:col-span-4 lg:text-right reveal d1">
+        <div class="inline-flex items-center gap-3 text-[--ink]/55 font-light">
+          <span class="w-2 h-2 rounded-full bg-[--cherry] pulse-ruby"></span>
+          Оновлено 15.09.2026
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal d2">
+      <div class="pdf-frame">
+        <iframe src="ПРАЙС_основний_РРЦ_ ( оновлені ціни 15.09.26 ).pdf" class="w-full h-[480px] sm:h-[620px] md:h-[760px]" title="Прайс-лист"></iframe>
+      </div>
+
+      <div class="mt-10 flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div class="text-[0.65rem] tracking-[0.22em] uppercase text-[--muted]">PDF · РРЦ · Оновлено 15.09.26</div>
+        <a href="ПРАЙС_основний_РРЦ_ ( оновлені ціни 15.09.26 ).pdf" target="_blank" download class="btn-lux">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          Завантажити
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="relative py-28 sm:py-40 bg-[--bg-soft] overflow-hidden">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(190,18,60,0.12),transparent_65%)]"></div>
+
+  <div class="relative max-w-[1600px] mx-auto px-6 sm:px-12">
+    <div class="grid lg:grid-cols-12 gap-14 items-center">
+      <div class="lg:col-span-5 reveal">
+        <div class="flex items-center gap-4 mb-5">
+          <div class="w-10 h-px bg-[--cherry]"></div>
+          <span class="text-[0.68rem] tracking-[0.3em] uppercase text-[--cherry-light]">Contact · 04</span>
+        </div>
+        <h2 class="font-serif text-[clamp(2.4rem,4.8vw,4.5rem)] font-light leading-[1] mb-7">
+          Почнемо<br>
+          <span class="italic text-[--cherry]">співпрацю</span>
+        </h2>
+        <p class="text-[--ink]/60 text-lg font-light leading-relaxed max-w-md">
+          Зв'яжіться з нами для консультації, отримання комерційної пропозиції 
+          або оформлення замовлення.
+        </p>
+      </div>
+
+      <div class="lg:col-span-6 lg:col-start-7 space-y-5">
+        <a href="mailto:santehsferaif@gmail.com" class="lux-card p-7 sm:p-9 flex items-center justify-between group reveal d1">
+          <div>
+            <div class="text-[0.62rem] tracking-[0.3em] uppercase text-[--muted] mb-2">Email</div>
+            <div class="font-serif text-xl sm:text-2xl group-hover:text-[--cherry-light] transition break-all">
+              santehsferaif@gmail.com
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-[--cherry] shrink-0 group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+
+        <a href="tel:+380673424252" class="lux-card p-7 sm:p-9 flex items-center justify-between group reveal d2">
+          <div>
+            <div class="text-[0.62rem] tracking-[0.3em] uppercase text-[--muted] mb-2">Телефон</div>
+            <div class="font-serif text-xl sm:text-2xl group-hover:text-[--cherry-light] transition">
+              +38 (067) 342-42-52
+            </div>
+          </div>
+          <svg class="w-5 h-5 text-[--cherry] shrink-0 group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+
+        <div class="lux-card p-7 sm:p-9 reveal d3">
+          <div class="text-[0.62rem] tracking-[0.3em] uppercase text-[--muted] mb-2">Графік роботи</div>
+          <div class="font-serif text-xl sm:text-2xl">Пн – Пт · 09:00 – 18:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-[--border] py-14">
+  <div class="max-w-[1600px] mx-auto px-6 sm:px-12">
+    <div class="grid lg:grid-cols-12 gap-10 items-center mb-10">
+      <div class="lg:col-span-5">
+        <div class="font-serif text-3xl font-bold mb-3">Amidicon<span class="text-[--cherry]">.</span></div>
+        <p class="text-sm text-[--ink]/45 font-light max-w-xs">
+          Офіційний дистриб'ютор преміальної сантехніки в Україні
+        </p>
+      </div>
+
+      <div class="lg:col-span-3 lg:col-start-10 lg:text-right">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+                class="group inline-flex items-center gap-3 text-[0.68rem] tracking-[0.25em] uppercase text-[--ink]/50 hover:text-[--cherry-light] transition">
+          Нагору
+          <svg class="w-4 h-4 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hairline opacity-30 mb-8"></div>
+
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[0.65rem] tracking-[0.18em] uppercase text-[--ink]/35">
+      <div>© 2026 SantehSfera. Всі права захищені.</div>
+      <div class="flex gap-8">
+        <span>Made ◆ Ukraine</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-x').forEach(el => observer.observe(el));
+
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.classList.add('bg-[--bg]/90', 'backdrop-blur-xl');
+    } else {
+      header.classList.remove('bg-[--bg]/90', 'backdrop-blur-xl');
+    }
+  });
+
+  const glow = document.getElementById('cursorGlow');
+  let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.07;
+    glowY += (mouseY - glowY) * 0.07;
+    glow.style.left = glowX + 'px';
+    glow.style.top = glowY + 'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+</script>
+
+</body>
+</html>
